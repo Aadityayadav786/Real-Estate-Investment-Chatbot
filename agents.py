@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from langchain_cohere import ChatCohere
 from crewai import Agent
 from tools import search_tool
@@ -79,3 +80,54 @@ property_analyst = Agent(
    allow_delegation=False,
     verbose=True
 )
+=======
+from langchain_cohere import ChatCohere
+from crewai import Agent
+from tools import search_tool
+from dotenv import load_dotenv
+import os
+
+# Load environment variables (for COHERE_API_KEY)
+load_dotenv()
+
+# Get the Cohere API key from environment variables
+cohere_api_key = os.getenv("COHERE_API_KEY")
+if not cohere_api_key:
+    raise ValueError("Cohere API Key is missing. Make sure it is set in your .env file.")
+
+# Initialize Cohere LLM
+llm = ChatCohere(
+    model="command-r-plus",         # You can use other models like "command-r" or "command-light"
+    temperature=0.2,                # Adjust creativity
+    max_retries=2,
+    cohere_api_key=cohere_api_key
+)
+
+# Define the Property Researcher Agent
+property_researcher = Agent(
+    llm=llm,
+    role="Senior Retail Property Investment Researcher",
+    goal="Identify and analyze high-potential retail property investment opportunities in Bhopal",
+    backstory=(
+        "You are a seasoned expert in real estate market research with a strong understanding of the "
+        "retail sector. Your job is to find promising locations and analyze market, economic, and demographic data "
+        "to support investment decisions."
+    ),
+    tools=[search_tool],
+    verbose=True,
+    allow_delegations=False
+)
+
+# Define the Property Analyst Agent
+property_analyst = Agent(
+    llm=llm,
+    role="Senior Investment Property Analyst",
+    goal="Transform research into clear, insightful investment reports tailored for retail property investors",
+    backstory=(
+        "You are an experienced analyst who excels at taking complex data and turning it into structured, "
+        "investor-friendly reports. You assess financial viability, potential ROI, and associated risks."
+    ),
+    verbose=True,
+    allow_delegations=False
+)
+>>>>>>> 8c514d9 (First commit)
