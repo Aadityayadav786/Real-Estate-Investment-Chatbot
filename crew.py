@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from crewai import Crew
 from agents import property_researcher, property_analyst
 from tasks import property_research_task, property_analysis_task
@@ -11,7 +10,7 @@ crew = Crew(
 
 task_output = crew.kickoff()
 print(task_output)
-=======
+
 from crewai import Crew
 from agents import property_researcher, property_analyst
 from tasks import generate_tasks
@@ -36,4 +35,4 @@ def run_crew_for_city(city_name: str):
 #     city = "Bhopal"
 #     output = run_crew_for_city(city)
 #     print(output)
->>>>>>> 8c514d9 (First commit)
+
